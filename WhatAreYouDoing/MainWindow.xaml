@@ -1,0 +1,17 @@
+﻿<Window x:Class="WhatAreYouDoing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:whatAreYouDoing="clr-namespace:WhatAreYouDoing"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <whatAreYouDoing:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" Text="{Binding Value}" KeyUp="UIElement_OnKeyUp" Name="TextBox"></TextBox>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Entries}"></DataGrid>
+    </Grid>
+</Window>
