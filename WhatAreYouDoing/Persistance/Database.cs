@@ -11,21 +11,27 @@ namespace WhatAreYouDoing.Persistance
     public static class MyDatabaseFactory
     {
         private static EntryDatabase _database;
-        private static string dbFileName = "database.dbs";
+        private const string _fileName = "database.dbs";
+
+        public static string FileName
+        {
+            get { return _fileName; }
+        }
 
         public static EntryDatabase Current(bool inMemory = false)
         {
-            var db =  _database ?? (_database = new EntryDatabase());
+            var db =  _database ?? (_database = new EntryDatabase(_fileName, inMemory));
             if(!db.IsOpened)
                 if(inMemory)
-                    db.Open(dbFileName, 0);
+                    db.Open(_fileName, 0);
                 else
-                    db.Open(dbFileName);
+                    db.Open(_fileName);
             return db;
         }
 
         public static void Cleanup()
         {
+            if(_database.IsOpened) _database.Close();
             _database = null;
         }
     }
@@ -38,18 +44,20 @@ namespace WhatAreYouDoing.Persistance
 
     public class EntryDatabase : DatabaseImpl, IDisposable
     {
-        public EntryDatabase()
+        public EntryDatabase(string filePath, bool inMemory)
         {
-            Open("database.dbs",0);
+            if(inMemory)
+                Open(filePath,0);
+            else
+                Open(filePath);
+            DatabaseRoot dbRoot = null;
             if (Root == null)
             {
-                Root = new DatabaseRoot();
-                (Root as DatabaseRoot).EntryIndex = CreateIndex<Int64, Entry>(IndexType.Unique);
+                dbRoot = new DatabaseRoot();
+                dbRoot.EntryIndex = CreateIndex<Int64, Entry>(IndexType.Unique);
+                Root = dbRoot;
                 Commit();
             }
-            if((Root as DatabaseRoot).EntryIndex == null)
-                (Root as DatabaseRoot).EntryIndex = CreateIndex<Int64, Entry>(IndexType.Unique);
-            Commit();
         }
         public void Dispose()
         {
@@ -70,6 +78,7 @@ namespace WhatAreYouDoing.Persistance
         {
             storeObject(entry);
             GetRoot().EntryIndex.Put(entry.Oid, entry);
+            Commit();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace WhatAreYouDoing
                     .WithIdentity("trigger1", "group1")
                     .StartNow()
                     .WithSimpleSchedule(x => x
-                        .WithIntervalInSeconds(20)
+                        .WithIntervalInSeconds(1800)
                         .RepeatForever())
                     .Build();
 
