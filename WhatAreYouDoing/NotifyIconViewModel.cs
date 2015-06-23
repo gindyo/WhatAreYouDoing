@@ -1,19 +1,18 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using Quartz;
 
 namespace WhatAreYouDoing
 {
     /// <summary>
-    /// Provides bindable properties and commands for the NotifyIcon. In this sample, the
-    /// view model is assigned to the NotifyIcon in XAML. Alternatively, the startup routing
-    /// in App.xaml.cs could have created this view model, and assigned it to the NotifyIcon.
+    ///     Provides bindable properties and commands for the NotifyIcon. In this sample, the
+    ///     view model is assigned to the NotifyIcon in XAML. Alternatively, the startup routing
+    ///     in App.xaml.cs could have created this view model, and assigned it to the NotifyIcon.
     /// </summary>
     public class NotifyIconViewModel : IJob
     {
         /// <summary>
-        /// Shows a window, if none is already open.
+        ///     Shows a window, if none is already open.
         /// </summary>
         public ICommand ShowWindowCommand
         {
@@ -24,11 +23,11 @@ namespace WhatAreYouDoing
                     CanExecuteFunc = () => Application.Current.MainWindow == null,
                     CommandAction = () =>
                     {
-                            if(Application.Current.MainWindow != null && Application.Current.MainWindow.IsActive)
+                        if (Application.Current.MainWindow != null && Application.Current.MainWindow.IsActive)
                             return;
                         Application.Current.MainWindow = new MainWindow();
                         Application.Current.MainWindow.Show();
-                        ((MainWindow)Application.Current.MainWindow).TextBox.Focus();
+                        ((MainWindow) Application.Current.MainWindow).TextBox.Focus();
                         Application.Current.MainWindow.Title = "What are you doing?";
                         Application.Current.MainWindow.Activate();
                     }
@@ -37,7 +36,7 @@ namespace WhatAreYouDoing
         }
 
         /// <summary>
-        /// Hides the main window. This command is only enabled if a window is open.
+        ///     Hides the main window. This command is only enabled if a window is open.
         /// </summary>
         public ICommand HideWindowCommand
         {
@@ -53,45 +52,16 @@ namespace WhatAreYouDoing
 
 
         /// <summary>
-        /// Shuts down the application.
+        ///     Shuts down the application.
         /// </summary>
         public ICommand ExitApplicationCommand
         {
-            get
-            {
-                return new DelegateCommand {CommandAction = () => Application.Current.Shutdown()};
-            }
+            get { return new DelegateCommand {CommandAction = () => Application.Current.Shutdown()}; }
         }
 
         public void Execute(IJobExecutionContext context)
         {
-            Application.Current.Dispatcher.Invoke(new Action(delegate { ShowWindowCommand.Execute(null); }));
-        }
-    }
-
-
-    /// <summary>
-    /// Simplistic delegate command for the demo.
-    /// </summary>
-    public class DelegateCommand : ICommand
-    {
-        public Action CommandAction { get; set; }
-        public Func<bool> CanExecuteFunc { get; set; }
-
-        public void Execute(object parameter)
-        {
-            CommandAction();
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return CanExecuteFunc == null  || CanExecuteFunc();
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            Application.Current.Dispatcher.Invoke(delegate { ShowWindowCommand.Execute(null); });
         }
     }
 }

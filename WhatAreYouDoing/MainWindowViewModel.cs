@@ -7,9 +7,8 @@ namespace WhatAreYouDoing
 {
     public class MainWindowViewModel
     {
-        private Entry _entry;
+        private readonly Entry _entry;
         private string _value;
-        private List<Entry> _entries;
 
         public MainWindowViewModel()
         {
@@ -17,21 +16,16 @@ namespace WhatAreYouDoing
             Entries = MyDatabaseFactory.Current().GetAll();
         }
 
-        public List<Entry> Entries
-        {
-            get { return _entries; }
-            set { _entries = value; }
-        }
+        public List<Entry> Entries { get; set; }
 
         public string Value
         {
-            get { return   _value; }
+            get { return _value; }
             set
             {
                 _entry.Value = value;
                 _entry.Time = DateTime.Now;
                 _entry.Save();
-
             }
         }
 

@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Threading;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using Hardcodet.Wpf.TaskbarNotification;
 using Quartz;
 using Quartz.Impl;
-using Volante;
-using WhatAreYouDoing;
 
 namespace WhatAreYouDoing
 {
-
-   
     /// <summary>
-    /// Simple application. Check the XAML for comments.
+    ///     Simple application. Check the XAML for comments.
     /// </summary>
     public partial class App
     {
-        private TaskbarIcon notifyIcon;
         private IScheduler _scheduler;
+        private TaskbarIcon notifyIcon;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -46,7 +40,6 @@ namespace WhatAreYouDoing
 
                 // Tell quartz to schedule the job using our trigger
                 _scheduler.ScheduleJob(job, trigger);
-           
             }
             catch (SchedulerException se)
             {
@@ -57,15 +50,12 @@ namespace WhatAreYouDoing
             notifyIcon = (TaskbarIcon) FindResource("NotifyIcon");
         }
 
-        
 
         protected override void OnExit(ExitEventArgs e)
         {
-
             _scheduler.Shutdown();
             notifyIcon.Dispose(); //the icon would clean up automatically, but this is cleaner
             base.OnExit(e);
         }
-       
     }
 }

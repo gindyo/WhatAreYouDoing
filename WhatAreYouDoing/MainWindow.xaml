@@ -4,14 +4,14 @@
         xmlns:whatAreYouDoing="clr-namespace:WhatAreYouDoing"
         Title="MainWindow" Height="350" Width="525">
     <Window.DataContext>
-        <whatAreYouDoing:MainWindowViewModel/>
+        <whatAreYouDoing:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Text="{Binding Value}" KeyUp="UIElement_OnKeyUp" Name="TextBox"></TextBox>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Entries}"></DataGrid>
+        <TextBox Grid.Row="0" Text="{Binding Value}" KeyUp="UIElement_OnKeyUp" Name="TextBox" />
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Entries}" />
     </Grid>
 </Window>
