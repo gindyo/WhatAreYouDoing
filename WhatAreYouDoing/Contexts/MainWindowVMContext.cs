@@ -35,6 +35,7 @@ namespace WhatAreYouDoing.Contexts
         public void Close()
         {
             Application.Current.MainWindow.Close();
+            Application.Current.MainWindow = null;
         }
     }
 }

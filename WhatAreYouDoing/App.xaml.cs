@@ -17,8 +17,8 @@ namespace WhatAreYouDoing
         {
             var container = new WindsorContainer().Install(FromAssembly.This());
             Action a = () => {
-                                 var notifVm = container.Resolve<NotifyIconViewModel>();
-                                 notifVm.Execute();
+                 var notifVm = container.Resolve<NotifyIconViewModel>();
+                 notifVm.Execute();
             };
 
             new Scheduler().Repeat(a, 5000);

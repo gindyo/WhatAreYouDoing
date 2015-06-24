@@ -11,7 +11,13 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Text="{Binding Value}" KeyUp="UIElement_OnKeyUp" Name="TextBox" />
-        <DataGrid Grid.Row="1"  ItemsSource="{Binding Entries}"/>
+        <DataGrid Grid.Row="1"  ItemsSource="{Binding Entries}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="I was doing..." Binding="{Binding Value}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Time" Binding="{Binding Time}" Width="150" IsReadOnly="True"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
 
     </Grid>
 </Window>

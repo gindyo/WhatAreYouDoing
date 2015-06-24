@@ -7,11 +7,6 @@ namespace WhatAreYouDoing
 
     public class NotifyIconViewModel
     {
-
-        public NotifyIconViewModel()
-        {
-            
-        }
         public Func<MainWindow> MainWindowFactory { get; set; }
         public ICommand ShowWindowCommand
         {
@@ -22,7 +17,7 @@ namespace WhatAreYouDoing
                     CanExecuteFunc = () => Application.Current.MainWindow == null,
                     CommandAction = () =>
                     {
-                        if (Application.Current.MainWindow != null && Application.Current.MainWindow.IsActive)
+                        if (Application.Current.MainWindow != null)
                             return;
                         var mainWindow = MainWindowFactory();
                         Application.Current.MainWindow = mainWindow;
