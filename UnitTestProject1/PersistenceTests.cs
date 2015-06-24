@@ -7,7 +7,7 @@ using Volante;
 using WhatAreYouDoing.Factories;
 using WhatAreYouDoing.Persistance;
 
-namespace UnitTestProject1
+namespace WhatAreYouDoingTests
 {
     [TestClass]
     public class PersistenceTests

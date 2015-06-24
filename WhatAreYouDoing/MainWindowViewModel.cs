@@ -9,19 +9,19 @@ namespace WhatAreYouDoing
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private IMainWindowContext _context;
         private List<UIEntry> _entries;
         private IEntry _entry;
         private double _interval;
+        private IMainWindowViewModelContext _viewModelContext;
 
         public Scheduler Scheduler { get; set; }
 
-        public IMainWindowContext Context
+        public IMainWindowViewModelContext ViewModelContext
         {
-            get { return _context; }
+            get { return _viewModelContext; }
             set
             {
-                _context = value;
+                _viewModelContext = value;
                 _entry = value.GetCurrentEntry();
                 Entries = value.GetTodaysEntries().Select(e => new UIEntry(e)).ToList();
             }
@@ -43,7 +43,7 @@ namespace WhatAreYouDoing
             set
             {
                 _entry.Value = value;
-                _context.SaveCurrentEntry();
+                _viewModelContext.SaveCurrentEntry();
             }
         }
 
@@ -51,7 +51,7 @@ namespace WhatAreYouDoing
 
         public void CloseWindow()
         {
-            _context.Close();
+            _viewModelContext.Close();
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

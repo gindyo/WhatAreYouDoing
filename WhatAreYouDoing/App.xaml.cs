@@ -13,23 +13,22 @@ namespace WhatAreYouDoing
         protected override void OnStartup(StartupEventArgs e)
         {
             IWindsorContainer container = new WindsorContainer().Install(FromAssembly.This());
-           
+
             //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
             notifyIcon = (TaskbarIcon) FindResource("NotifyIcon");
-           
+
             //make sure the notifyIcon's context is resolved from the container
             notifyIcon.DataContext = container.Resolve<NotifyIconViewModel>();
 
             Action popTheWindow = () =>
             {
                 var notifVm = container.Resolve<NotifyIconViewModel>();
-                Dispatcher.Invoke(()=>notifVm.ShowWindowCommand.Execute(null));
+                Dispatcher.Invoke(() => notifVm.ShowWindowCommand.Execute(null));
             };
             var scheduler = container.Resolve<Scheduler>();
             const int min15 = 900000;
-            scheduler.Repeat(popTheWindow, min15 );
+            scheduler.Repeat(popTheWindow, min15);
             popTheWindow();
-
         }
 
         protected override void OnExit(ExitEventArgs e)

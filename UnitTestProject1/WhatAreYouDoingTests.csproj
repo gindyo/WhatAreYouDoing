@@ -51,7 +51,6 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
     <Reference Include="Volante">
       <HintPath>..\packages\Volante\Volante.dll</HintPath>
     </Reference>
@@ -70,10 +69,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BaseViewModelTest.cs" />
     <Compile Include="MainWindowContextTests.cs" />
+    <Compile Include="NotifyIconViewModelTests.cs" />
     <Compile Include="PersistenceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainWindowVmTests.cs" />
+    <Compile Include="MainWindowViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WhatAreYouDoing\WhatAreYouDoing.csproj">

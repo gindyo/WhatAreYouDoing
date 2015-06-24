@@ -7,12 +7,12 @@ using WhatAreYouDoing.Persistance;
 
 namespace WhatAreYouDoing.Contexts
 {
-    public class MainWindowVMContext : IMainWindowContext
+    public class MainWindowViewModelContext : IMainWindowViewModelContext
     {
         private readonly IEntry _currentEntry;
         private readonly IWAYDDatasource _datasource;
 
-        public MainWindowVMContext(IDataSourceFactory datasourceFactory)
+        public MainWindowViewModelContext(IDataSourceFactory datasourceFactory)
         {
             _datasource = datasourceFactory.GetCurrent();
             _currentEntry = _datasource.GetEntry();
@@ -27,9 +27,10 @@ namespace WhatAreYouDoing.Contexts
         {
             return _datasource.GetAll().ToList();
         }
+
         public List<IEntry> GetTodaysEntries()
         {
-            return _datasource.GetAll().Where(e=>e.Time > DateTime.Today).ToList();
+            return _datasource.GetAll().Where(e => e.Time > DateTime.Today).ToList();
         }
 
         public void SaveCurrentEntry()

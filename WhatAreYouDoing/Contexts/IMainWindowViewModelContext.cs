@@ -3,7 +3,7 @@ using WhatAreYouDoing.Persistance;
 
 namespace WhatAreYouDoing.Contexts
 {
-    public interface IMainWindowContext
+    public interface IMainWindowViewModelContext
     {
         IEntry GetCurrentEntry();
         List<IEntry> GetAllEntries();

@@ -13,16 +13,6 @@ namespace WhatAreYouDoing
             _app = Application.Current;
         }
 
-        public virtual void SetMainWindow(MainWindow mWindow)
-        {
-            _app.MainWindow = mWindow;
-        }
-
-        public virtual MainWindow GetMainWindow()
-        {
-            return _app.MainWindow as MainWindow;
-        }
-
         public virtual Dispatcher Dispatcher
         {
             get { return _app.Dispatcher; }
@@ -56,13 +46,15 @@ namespace WhatAreYouDoing
             mainWindow.Activate();
             SystemSounds.Beep.Play();
         }
-    }
 
-    public interface IApplicationWrapper
-    {
-        void Shutdown();
-        void PopWindow(MainWindow mainWindow);
-        bool WindowIsOpen();
-        void CloseCurrentWindow();
+        public virtual void SetMainWindow(MainWindow mWindow)
+        {
+            _app.MainWindow = mWindow;
+        }
+
+        public virtual MainWindow GetMainWindow()
+        {
+            return _app.MainWindow as MainWindow;
+        }
     }
 }

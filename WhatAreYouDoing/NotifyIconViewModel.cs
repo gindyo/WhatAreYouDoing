@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Media;
 using System.Windows.Input;
 
 namespace WhatAreYouDoing
 {
     public class NotifyIconViewModel
     {
+        #region Windsor injected
+
         public IApplicationWrapper CurrentApp { get; set; }
         public Func<MainWindow> MainWindowFactory { get; set; }
+
+        #endregion
 
         public ICommand ShowWindowCommand
         {
@@ -33,7 +36,7 @@ namespace WhatAreYouDoing
                 return new DelegateCommand
                 {
                     CommandAction = () => CurrentApp.CloseCurrentWindow(),
-                    CanExecuteFunc = () => CurrentApp.WindowIsOpen() 
+                    CanExecuteFunc = () => CurrentApp.WindowIsOpen()
                 };
             }
         }

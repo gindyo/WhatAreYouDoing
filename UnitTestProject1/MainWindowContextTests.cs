@@ -35,7 +35,7 @@ namespace WhatAreYouDoingTests
             _datasourceFactory.Setup(ds => ds.GetCurrent()).Returns(datasource.Object);
             var data = new List<IEntry> {new Entry()};
             datasource.Setup(ds => ds.GetAll()).Returns(data.AsQueryable());
-            var context = new MainWindowVMContext(_datasourceFactory.Object);
+            var context = new MainWindowViewModelContext(_datasourceFactory.Object);
             context.GetAllEntries();
             _mockRepo.VerifyAll();
         }
@@ -47,7 +47,7 @@ namespace WhatAreYouDoingTests
             Mock<IWAYDDatasource> datasource = _mockRepo.Create<IWAYDDatasource>();
             _datasourceFactory.Setup(ds => ds.GetCurrent()).Returns(datasource.Object);
             datasource.Setup(ds => ds.GetEntry());
-            var context = new MainWindowVMContext(_datasourceFactory.Object);
+            var context = new MainWindowViewModelContext(_datasourceFactory.Object);
             context.GetCurrentEntry();
             _mockRepo.VerifyAll();
         }
