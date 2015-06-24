@@ -12,13 +12,14 @@ namespace UnitTestProject1
     [TestClass]
     public class PersistenceTests
     {
-        private IDataSourceFactory _dbFactory;
+        public IDataSourceFactory DbFactory { get; set; }
 
         [TestInitialize]
         public void Init()
         {
-           DbFactory = new DatasourceFactory(true); 
+            DbFactory = new DatasourceFactory(true);
         }
+
         [TestCleanup]
         public void Cleanup()
         {
@@ -26,12 +27,6 @@ namespace UnitTestProject1
                 DbFactory.Cleanup();
             if (File.Exists(DatasourceFactory.FileName))
                 File.Delete(DatasourceFactory.FileName);
-        }
-
-        public IDataSourceFactory DbFactory
-        {
-            get { return _dbFactory; }
-            set { _dbFactory = value; }
         }
 
         [TestMethod]
@@ -93,7 +88,7 @@ namespace UnitTestProject1
         {
             List<IEntry> all;
             //write entries to database and close database
-            using (var _db = new DatasourceFactory(false).GetCurrent())
+            using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
             {
                 for (int i = 0; i < 10; i++)
                 {

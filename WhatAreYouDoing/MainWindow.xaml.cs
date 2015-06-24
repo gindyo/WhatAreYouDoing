@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace WhatAreYouDoing
@@ -10,7 +8,10 @@ namespace WhatAreYouDoing
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowViewModel _viewModel;
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
         public MainWindowViewModel ViewModel
         {
@@ -18,16 +19,11 @@ namespace WhatAreYouDoing
             set { DataContext = value; }
         }
 
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
         private void UIElement_OnKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
-                
-                ((MainWindowViewModel) ViewModel).CloseWindow();
+
+                ViewModel.CloseWindow();
         }
     }
 }

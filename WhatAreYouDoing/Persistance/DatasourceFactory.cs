@@ -20,7 +20,6 @@ namespace WhatAreYouDoing.Persistance
 
         public IWAYDDatasource GetCurrent()
         {
-            
             EntryDatabase db = _database ?? (_database = new EntryDatabase(_fileName, _inMemory));
             if (!db.IsOpened)
                 if (_inMemory)
@@ -35,6 +34,5 @@ namespace WhatAreYouDoing.Persistance
             if (_database.IsOpened) _database.Close();
             _database = null;
         }
-
-   }
+    }
 }

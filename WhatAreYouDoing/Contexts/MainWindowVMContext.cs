@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using WhatAreYouDoing.Factories;
@@ -25,6 +26,10 @@ namespace WhatAreYouDoing.Contexts
         public List<IEntry> GetAllEntries()
         {
             return _datasource.GetAll().ToList();
+        }
+        public List<IEntry> GetTodaysEntries()
+        {
+            return _datasource.GetAll().Where(e=>e.Time > DateTime.Today).ToList();
         }
 
         public void SaveCurrentEntry()

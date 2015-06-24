@@ -71,6 +71,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationWrapper.cs" />
+    <Compile Include="Factories\IWAYDDatasource.cs" />
+    <Compile Include="IMainWindowFactory.cs" />
+    <Compile Include="Scheduler.cs" />
+    <Compile Include="UIEntry.cs" />
     <Compile Include="WindsorInstaller.cs" />
     <Compile Include="Contexts\IMainWindowContext.cs" />
     <Compile Include="Contexts\MainWindowVMContext.cs" />

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Timers;
 using System.Windows;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Hardcodet.Wpf.TaskbarNotification;
-using Quartz;
-using Quartz.Impl;
 
 namespace WhatAreYouDoing
 {
@@ -15,17 +12,25 @@ namespace WhatAreYouDoing
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var container = new WindsorContainer().Install(FromAssembly.This());
-            Action a = () => {
-                 var notifVm = container.Resolve<NotifyIconViewModel>();
-                 notifVm.Execute();
-            };
-
-            new Scheduler().Repeat(a, 5000);
+            IWindsorContainer container = new WindsorContainer().Install(FromAssembly.This());
+           
             //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
             notifyIcon = (TaskbarIcon) FindResource("NotifyIcon");
-        }
+           
+            //make sure the notifyIcon's context is resolved from the container
+            notifyIcon.DataContext = container.Resolve<NotifyIconViewModel>();
 
+            Action popTheWindow = () =>
+            {
+                var notifVm = container.Resolve<NotifyIconViewModel>();
+                Dispatcher.Invoke(()=>notifVm.ShowWindowCommand.Execute(null));
+            };
+            var scheduler = container.Resolve<Scheduler>();
+            const int min15 = 900000;
+            scheduler.Repeat(popTheWindow, min15 );
+            popTheWindow();
+
+        }
 
         protected override void OnExit(ExitEventArgs e)
         {
@@ -33,22 +38,4 @@ namespace WhatAreYouDoing
             base.OnExit(e);
         }
     }
-        public class Scheduler
-        {
-            private Timer _timer;
-            public Scheduler()
-            {
-                _timer = new Timer();
-            }
-
-            public void Repeat(Action act, int i)
-            {
-                _timer.AutoReset = true;
-                _timer.Interval = i;
-                ElapsedEventHandler eh = (sender, args) => act();
-                _timer.Elapsed += eh;
-                _timer.Start();
-            }
-        }
-  
 }

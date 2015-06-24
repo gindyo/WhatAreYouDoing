@@ -18,7 +18,7 @@ namespace WhatAreYouDoing.Persistance
             set
             {
                 _value = value;
-                this.Store();
+                Store();
             }
         }
 

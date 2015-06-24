@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,23 +9,22 @@ namespace WhatAreYouDoing
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private IEntry _entry;
         private IMainWindowContext _context;
         private List<UIEntry> _entries;
+        private IEntry _entry;
+        private double _interval;
+
+        public Scheduler Scheduler { get; set; }
 
         public IMainWindowContext Context
         {
             get { return _context; }
             set
             {
-                _context = value; 
+                _context = value;
                 _entry = value.GetCurrentEntry();
-                Entries = value.GetAllEntries().Select(e=> new UIEntry(e)).ToList();
+                Entries = value.GetTodaysEntries().Select(e => new UIEntry(e)).ToList();
             }
-        }
-
-        public MainWindowViewModel()
-        {
         }
 
         public List<UIEntry> Entries
@@ -49,37 +47,17 @@ namespace WhatAreYouDoing
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public void CloseWindow()
         {
             _context.Close();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    public class UIEntry
-    {
-        private IEntry entry;
-        public UIEntry(IEntry entry)
-        {
-            this.entry = entry;
-        }
-
-        public string Value
-        {
-            get { return entry.Value; }
-            set { entry.Value = value; }
-        }
-
-        public DateTime Time
-        {
-            get { return entry.Time; }
         }
     }
 }

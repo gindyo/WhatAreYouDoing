@@ -9,5 +9,6 @@ namespace WhatAreYouDoing.Contexts
         List<IEntry> GetAllEntries();
         void SaveCurrentEntry();
         void Close();
+        List<IEntry> GetTodaysEntries();
     }
 }
