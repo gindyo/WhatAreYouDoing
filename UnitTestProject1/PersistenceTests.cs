@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Volante;
+using WhatAreYouDoing.Factories;
 using WhatAreYouDoing.Persistance;
 
 namespace UnitTestProject1
@@ -10,33 +12,46 @@ namespace UnitTestProject1
     [TestClass]
     public class PersistenceTests
     {
+        private IDataSourceFactory _dbFactory;
+
+        [TestInitialize]
+        public void Init()
+        {
+           DbFactory = new DatasourceFactory(true); 
+        }
         [TestCleanup]
         public void Cleanup()
         {
             if (CurrentDb().IsOpened)
-                MyDatabaseFactory.Cleanup();
-            if (File.Exists(MyDatabaseFactory.FileName))
-                File.Delete(MyDatabaseFactory.FileName);
+                DbFactory.Cleanup();
+            if (File.Exists(DatasourceFactory.FileName))
+                File.Delete(DatasourceFactory.FileName);
+        }
+
+        public IDataSourceFactory DbFactory
+        {
+            get { return _dbFactory; }
+            set { _dbFactory = value; }
         }
 
         [TestMethod]
         public void DatabaseCanBeOpened()
         {
-            using (EntryDatabase _db = CurrentDb())
+            using (IWAYDDatasource _db = CurrentDb())
             {
                 Assert.IsTrue(_db.Root != null);
             }
         }
 
-        private static EntryDatabase CurrentDb()
+        private IWAYDDatasource CurrentDb()
         {
-            return MyDatabaseFactory.Current(true);
+            return DbFactory.GetCurrent();
         }
 
         [TestMethod]
         public void CanInsertEntry()
         {
-            using (EntryDatabase _db = CurrentDb())
+            using (IWAYDDatasource _db = CurrentDb())
             {
                 long initsize = _db.UsedSize;
                 var entry = new Entry();
@@ -49,7 +64,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void CanRetreiveEntry()
         {
-            using (EntryDatabase _db = CurrentDb())
+            using (IWAYDDatasource _db = CurrentDb())
             {
                 long initsize = _db.UsedSize;
                 var entry = new Entry();
@@ -59,50 +74,39 @@ namespace UnitTestProject1
             }
         }
 
-        [TestMethod]
-        public void EntrySavesItsef()
-        {
-            var entry = new Entry();
-            entry.Save();
-            using (EntryDatabase _db = CurrentDb())
-            {
-                IPersistent persistedEntry = _db.GetObjectByOid(entry.Oid);
-                Assert.AreEqual(persistedEntry, entry);
-            }
-        }
 
         [TestMethod]
         public void ReturnsAllEntries()
         {
-            using (EntryDatabase _db = CurrentDb())
+            using (IWAYDDatasource _db = CurrentDb())
             {
-                new Entry().Save();
-                new Entry().Save();
-                new Entry().Save();
+                _db.Save(new Entry());
+                _db.Save(new Entry());
+                _db.Save(new Entry());
 
-                Assert.AreEqual(3, _db.GetAll().Count);
+                Assert.AreEqual(3, _db.GetAll().Count());
             }
         }
 
         [TestMethod]
         public void EntriesArePersistedToFile()
         {
-            List<Entry> all;
+            List<IEntry> all;
             //write entries to database and close database
-            using (EntryDatabase _db = MyDatabaseFactory.Current())
+            using (var _db = new DatasourceFactory(false).GetCurrent())
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    new Entry {Time = DateTime.Now}.Save();
+                    _db.Save(new Entry {Time = DateTime.Now});
                 }
             }
             //open database again and get all entries
-            using (EntryDatabase _db = MyDatabaseFactory.Current())
+            using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
             {
-                all = _db.GetAll();
+                all = _db.GetAll().ToList();
             }
             //delete the file
-            File.Delete(MyDatabaseFactory.FileName);
+            File.Delete(DatasourceFactory.FileName);
 
             Assert.AreEqual(10, all.Count);
         }
