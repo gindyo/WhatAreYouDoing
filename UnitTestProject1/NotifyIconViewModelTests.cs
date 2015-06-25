@@ -18,7 +18,8 @@ namespace WhatAreYouDoingTests
             _appWrapper.Setup(w => w.PopWindow(It.IsAny<MainWindow>()));
             _container.Register(Component.For<IApplicationWrapper>()
                 .Instance(_appWrapper.Object)
-                .Named("FakeWrapper").IsDefault());
+                .Named("FakeWrapper")
+                .IsDefault());
             var notifyWindowVm = _container.Resolve<NotifyIconViewModel>();
             if (notifyWindowVm.ShowWindowCommand.CanExecute(null))
                 notifyWindowVm.ShowWindowCommand.Execute(null);
@@ -32,7 +33,8 @@ namespace WhatAreYouDoingTests
             _appWrapper.Setup(w => w.WindowIsOpen()).Returns(true);
             _container.Register(Component.For<IApplicationWrapper>()
                 .Instance(_appWrapper.Object)
-                .Named("FakeWrapper").IsDefault());
+                .Named("FakeWrapper")
+                .IsDefault());
             var notifyWindowVm = _container.Resolve<NotifyIconViewModel>();
             if (notifyWindowVm.ShowWindowCommand.CanExecute(null))
                 notifyWindowVm.ShowWindowCommand.Execute(null);

@@ -9,12 +9,10 @@ namespace WhatAreYouDoing.TaskbarIcon
 {
     public class NotifyIconViewModel
     {
-        #region Windsor injected
 
         public IApplicationWrapper CurrentApp { get; set; }
         public Func<MainWindow> MainWindowFactory { get; set; }
 
-        #endregion
 
         public ICommand ShowWindowCommand
         {

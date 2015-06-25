@@ -48,7 +48,6 @@ namespace WhatAreYouDoing.Startup
 
         private void ExitIfAlreadyRunning()
         {
-            string procName = Process.GetCurrentProcess().ProcessName;
             string[] processes = Process.GetProcesses().Select(p=>p.ProcessName).ToArray();
             if (processes.Count(p => p.Contains("WhatAreYouDoing")) < 2)
                 return;

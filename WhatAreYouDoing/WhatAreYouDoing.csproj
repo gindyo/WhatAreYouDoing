@@ -79,7 +79,6 @@
     <Compile Include="Utilities\Scheduler.cs" />
     <Compile Include="Startup\WindsorInstaller.cs" />
     <Compile Include="Factories\IDataSourceFactory.cs" />
-    <Compile Include="Factories\IEntryFactory.cs" />
     <Compile Include="Persistance\IEntry.cs" />
     <Compile Include="Startup\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
