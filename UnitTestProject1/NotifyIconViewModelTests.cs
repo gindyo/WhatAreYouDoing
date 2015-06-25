@@ -1,8 +1,7 @@
 using Castle.MicroKernel.Registration;
-using Castle.Windsor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using WhatAreYouDoing;
+using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Main;
 using WhatAreYouDoing.Startup;
 using WhatAreYouDoing.TaskbarIcon;

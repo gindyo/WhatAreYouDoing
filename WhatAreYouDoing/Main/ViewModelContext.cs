@@ -3,20 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using WhatAreYouDoing.BaseClasses;
-using WhatAreYouDoing.Factories;
+using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Persistance;
 
 namespace WhatAreYouDoing.Main
 {
-    public interface IViewModelContext
-    {
-        IEntry GetCurrentEntry();
-        List<IEntry> GetAllEntries();
-        void SaveCurrentEntry();
-        void Close();
-        List<IEntry> GetTodaysEntries();
-    }
-
     public class ViewModelContext : BaseViewModelContext, IViewModelContext
     {
         private readonly IEntry _currentEntry;
@@ -47,8 +38,4 @@ namespace WhatAreYouDoing.Main
             Application.Current.MainWindow = null;
         }
     }
-
-   
-
-   
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace WhatAreYouDoing.Persistance
+namespace WhatAreYouDoing.Interfaces
 {
     public interface IEntry
     {

@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using WhatAreYouDoing.BaseClasses;
-using WhatAreYouDoing.Main;
+using WhatAreYouDoing.Interfaces;
+using WhatAreYouDoing.UIModels;
 
 namespace WhatAreYouDoing.History
 {
-    public interface IHistoryViewModel
-    {
-        DateTime SelectedDate { get; set; }
-        List<UIEntry> Entries { get; set; }
-    }
+    
+
     public class ViewModel : BaseViewModel, IHistoryViewModel
     {
-        private DateTime _selectedDate;
-        private List<UIEntry> _entries;
         private IViewModelContext _context;
+        private DateTime _selectedDate;
 
         public IViewModelContext Context
         {
@@ -25,10 +22,6 @@ namespace WhatAreYouDoing.History
                 _context = value;
                 SelectedDate = DateTime.Now;
             }
-        }
-
-        public ViewModel()
-        {
         }
 
         public DateTime SelectedDate
@@ -44,10 +37,6 @@ namespace WhatAreYouDoing.History
             }
         }
 
-        public List<UIEntry> Entries
-        {
-            get { return _entries; }
-            set { _entries = value; }
-        }
+        public List<UIEntry> Entries { get; set; }
     }
 }

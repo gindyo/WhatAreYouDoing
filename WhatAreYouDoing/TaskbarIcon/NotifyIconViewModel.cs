@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Input;
+using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Main;
 using WhatAreYouDoing.Startup;
 using WhatAreYouDoing.Utilities;
@@ -9,7 +10,6 @@ namespace WhatAreYouDoing.TaskbarIcon
 {
     public class NotifyIconViewModel
     {
-
         public IApplicationWrapper CurrentApp { get; set; }
         public Func<MainWindow> MainWindowFactory { get; set; }
 

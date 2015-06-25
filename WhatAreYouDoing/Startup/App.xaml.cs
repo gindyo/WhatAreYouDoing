@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
@@ -14,10 +13,10 @@ namespace WhatAreYouDoing.Startup
 {
     public partial class App
     {
-        private Hardcodet.Wpf.TaskbarNotification.TaskbarIcon notifyIcon;
+        private const string OpenWindowCommand = "openWidowCommand";
+        private const string PipeName = "pipeServerName";
         private IWindsorContainer _container;
-        const string OpenWindowCommand = "openWidowCommand";
-        const string PipeName = "pipeServerName";
+        private Hardcodet.Wpf.TaskbarNotification.TaskbarIcon notifyIcon;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -48,13 +47,13 @@ namespace WhatAreYouDoing.Startup
 
         private void ExitIfAlreadyRunning()
         {
-            string[] processes = Process.GetProcesses().Select(p=>p.ProcessName).ToArray();
+            string[] processes = Process.GetProcesses().Select(p => p.ProcessName).ToArray();
             if (processes.Count(p => p.Contains("WhatAreYouDoing")) < 2)
                 return;
 
             var client = new NamedPipeClientStream(PipeName);
             client.Connect();
-            StreamWriter writer = new StreamWriter(client);
+            var writer = new StreamWriter(client);
             writer.WriteLine(OpenWindowCommand);
             writer.Flush();
             Shutdown();
@@ -65,16 +64,17 @@ namespace WhatAreYouDoing.Startup
             notifyIcon.Dispose(); //the icon would clean up automatically, but this is cleaner
             base.OnExit(e);
         }
-        void StartServer()
+
+        private void StartServer()
         {
             Task.Factory.StartNew(() =>
             {
                 var server = new NamedPipeServerStream(PipeName);
-                StreamReader reader = new StreamReader(server);
+                var reader = new StreamReader(server);
                 while (true)
                 {
                     server.WaitForConnection();
-                    var line = reader.ReadLine();
+                    string line = reader.ReadLine();
                     if (null != line && line == OpenWindowCommand)
                     {
                         Dispatcher.Invoke(PopTheWindow);

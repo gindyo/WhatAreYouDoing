@@ -2,7 +2,9 @@
 using System.Linq;
 using WhatAreYouDoing.BaseClasses;
 using WhatAreYouDoing.History;
+using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Persistance;
+using WhatAreYouDoing.UIModels;
 using WhatAreYouDoing.Utilities;
 
 namespace WhatAreYouDoing.Main
@@ -14,12 +16,12 @@ namespace WhatAreYouDoing.Main
         private double _interval;
         private IViewModelContext _viewModelContext;
 
-#region Windsor injected
+        #region Windsor injected
 
         public IHistoryViewModel HistoryViewModel { get; set; }
         public Scheduler Scheduler { get; set; }
 
-#endregion
+        #endregion
 
         public IViewModelContext ViewModelContext
         {
@@ -56,7 +58,5 @@ namespace WhatAreYouDoing.Main
         {
             _viewModelContext.Close();
         }
-
-       
     }
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using Volante;
 using Volante.Impl;
-using WhatAreYouDoing.Factories;
+using WhatAreYouDoing.Interfaces;
 
 namespace WhatAreYouDoing.Persistance
 {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using WhatAreYouDoing.Factories;
+using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Main;
 using WhatAreYouDoing.Persistance;
 

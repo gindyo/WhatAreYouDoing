@@ -1,6 +1,6 @@
 using WhatAreYouDoing.Main;
 
-namespace WhatAreYouDoing.Startup
+namespace WhatAreYouDoing.Interfaces
 {
     public interface IApplicationWrapper
     {

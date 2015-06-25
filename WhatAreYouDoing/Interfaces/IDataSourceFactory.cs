@@ -1,4 +1,4 @@
-﻿namespace WhatAreYouDoing.Factories
+﻿namespace WhatAreYouDoing.Interfaces
 {
     public interface IDataSourceFactory
     {

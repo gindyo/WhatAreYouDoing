@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Volante;
-using WhatAreYouDoing.Factories;
+using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Persistance;
 
 namespace WhatAreYouDoingTests

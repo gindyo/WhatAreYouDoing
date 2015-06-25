@@ -69,17 +69,19 @@
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="History\ViewModel.cs" />
-    <Compile Include="Main\MainWindow.xaml.cs" />
-    <Compile Include="Main\UIEntry.cs" />
+    <Compile Include="Interfaces\IHistoryViewModel.cs" />
+    <Compile Include="Interfaces\IViewModelContext.cs" />
+    <Compile Include="Main\MainWindow.cs" />
+    <Compile Include="UIModels\UIEntry.cs" />
     <Compile Include="Main\ViewModel.cs" />
     <Compile Include="Main\ViewModelContext.cs" />
     <Compile Include="Startup\ApplicationWrapper.cs" />
-    <Compile Include="Factories\IWAYDDatasource.cs" />
-    <Compile Include="Startup\IApplicationWrapper.cs" />
+    <Compile Include="Interfaces\IWAYDDatasource.cs" />
+    <Compile Include="Interfaces\IApplicationWrapper.cs" />
     <Compile Include="Utilities\Scheduler.cs" />
     <Compile Include="Startup\WindsorInstaller.cs" />
-    <Compile Include="Factories\IDataSourceFactory.cs" />
-    <Compile Include="Persistance\IEntry.cs" />
+    <Compile Include="Interfaces\IDataSourceFactory.cs" />
+    <Compile Include="Interfaces\IEntry.cs" />
     <Compile Include="Startup\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -134,7 +136,9 @@
   <ItemGroup>
     <Resource Include="Resources\hourglass.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Factories\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

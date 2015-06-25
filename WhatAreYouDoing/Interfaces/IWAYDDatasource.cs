@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
 using Volante;
-using WhatAreYouDoing.Persistance;
 
-namespace WhatAreYouDoing.Factories
+namespace WhatAreYouDoing.Interfaces
 {
     public interface IWAYDDatasource : IDatabase, IDisposable
     {

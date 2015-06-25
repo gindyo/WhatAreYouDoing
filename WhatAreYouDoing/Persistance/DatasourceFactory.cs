@@ -1,4 +1,4 @@
-﻿using WhatAreYouDoing.Factories;
+﻿using WhatAreYouDoing.Interfaces;
 
 namespace WhatAreYouDoing.Persistance
 {

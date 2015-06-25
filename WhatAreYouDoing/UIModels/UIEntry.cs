@@ -1,7 +1,8 @@
 using System;
+using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Persistance;
 
-namespace WhatAreYouDoing.Main
+namespace WhatAreYouDoing.UIModels
 {
     public class UIEntry
     {
@@ -38,7 +39,7 @@ namespace WhatAreYouDoing.Main
             var other = obj as UIEntry;
             if (null == other)
                 return false;
-            return  Value == other.Value && Time == other.Time;
+            return Value == other.Value && Time == other.Time;
         }
     }
 }
