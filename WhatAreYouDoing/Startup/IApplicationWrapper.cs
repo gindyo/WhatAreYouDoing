@@ -1,4 +1,6 @@
-namespace WhatAreYouDoing
+using WhatAreYouDoing.Main;
+
+namespace WhatAreYouDoing.Startup
 {
     public interface IApplicationWrapper
     {

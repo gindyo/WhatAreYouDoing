@@ -6,7 +6,7 @@ using WhatAreYouDoing.Factories;
 
 namespace WhatAreYouDoing.Persistance
 {
-    public class EntryDatabase : DatabaseImpl, IDisposable, IWAYDDatasource
+    public class EntryDatabase : DatabaseImpl, IWAYDDatasource
     {
         public EntryDatabase(string filePath, bool inMemory)
         {
@@ -43,7 +43,7 @@ namespace WhatAreYouDoing.Persistance
                 entry.Store();
         }
 
-        public IEntry GetEntry(int id)
+        public IEntry GetEntry(long id)
         {
             return GetRoot().EntryIndex.Get(id);
         }

@@ -2,20 +2,21 @@
 using System.Windows;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using Hardcodet.Wpf.TaskbarNotification;
+using WhatAreYouDoing.TaskbarIcon;
+using WhatAreYouDoing.Utilities;
 
-namespace WhatAreYouDoing
+namespace WhatAreYouDoing.Startup
 {
     public partial class App
     {
-        private TaskbarIcon notifyIcon;
+        private Hardcodet.Wpf.TaskbarNotification.TaskbarIcon notifyIcon;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             IWindsorContainer container = new WindsorContainer().Install(FromAssembly.This());
 
             //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
-            notifyIcon = (TaskbarIcon) FindResource("NotifyIcon");
+            notifyIcon = (Hardcodet.Wpf.TaskbarNotification.TaskbarIcon) FindResource("NotifyIcon");
 
             //make sure the notifyIcon's context is resolved from the container
             notifyIcon.DataContext = container.Resolve<NotifyIconViewModel>();

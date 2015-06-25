@@ -59,44 +59,48 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Startup\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApplicationWrapper.cs" />
+    <Compile Include="BaseClasses\BaseViewModel.cs" />
+    <Compile Include="BaseClasses\BaseViewModelContext.cs" />
+    <Compile Include="History\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="History\ViewModel.cs" />
+    <Compile Include="Main\MainWindow.xaml.cs" />
+    <Compile Include="Main\UIEntry.cs" />
+    <Compile Include="Main\ViewModel.cs" />
+    <Compile Include="Main\ViewModelContext.cs" />
+    <Compile Include="Startup\ApplicationWrapper.cs" />
     <Compile Include="Factories\IWAYDDatasource.cs" />
-    <Compile Include="IApplicationWrapper.cs" />
-    <Compile Include="IMainWindowFactory.cs" />
-    <Compile Include="Scheduler.cs" />
-    <Compile Include="UIEntry.cs" />
-    <Compile Include="WindsorInstaller.cs" />
-    <Compile Include="Contexts\IMainWindowViewModelContext.cs" />
-    <Compile Include="Contexts\MainWindowViewModelContext.cs" />
-    <Compile Include="Factories\EntryFactory.cs" />
+    <Compile Include="Startup\IApplicationWrapper.cs" />
+    <Compile Include="Utilities\Scheduler.cs" />
+    <Compile Include="Startup\WindsorInstaller.cs" />
     <Compile Include="Factories\IDataSourceFactory.cs" />
     <Compile Include="Factories\IEntryFactory.cs" />
     <Compile Include="Persistance\IEntry.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Startup\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DelegateCommand.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="NotifyIconResources.xaml">
+    <Compile Include="Utilities\DelegateCommand.cs" />
+    <Page Include="History\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Main\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\NotifyIconResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="NotifyIconViewModel.cs" />
+    <Compile Include="TaskbarIcon\NotifyIconViewModel.cs" />
     <Compile Include="Persistance\DatasourceFactory.cs" />
     <Compile Include="Persistance\DatabaseRoot.cs" />
     <Compile Include="Persistance\Entry.cs" />
@@ -118,9 +122,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="job_scheduling_data_2_0.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -129,11 +130,12 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Startup\App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="hourglass.ico" />
+    <Resource Include="Resources\hourglass.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

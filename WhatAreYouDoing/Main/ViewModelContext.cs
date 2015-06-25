@@ -2,30 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using WhatAreYouDoing.BaseClasses;
 using WhatAreYouDoing.Factories;
 using WhatAreYouDoing.Persistance;
 
-namespace WhatAreYouDoing.Contexts
+namespace WhatAreYouDoing.Main
 {
-    public class MainWindowViewModelContext : IMainWindowViewModelContext
+    public interface IViewModelContext
+    {
+        IEntry GetCurrentEntry();
+        List<IEntry> GetAllEntries();
+        void SaveCurrentEntry();
+        void Close();
+        List<IEntry> GetTodaysEntries();
+    }
+
+    public class ViewModelContext : BaseViewModelContext, IViewModelContext
     {
         private readonly IEntry _currentEntry;
-        private readonly IWAYDDatasource _datasource;
 
-        public MainWindowViewModelContext(IDataSourceFactory datasourceFactory)
+        public ViewModelContext(IDataSourceFactory datasourceFactory) : base(datasourceFactory)
         {
-            _datasource = datasourceFactory.GetCurrent();
             _currentEntry = _datasource.GetEntry();
         }
 
         public IEntry GetCurrentEntry()
         {
             return _currentEntry;
-        }
-
-        public List<IEntry> GetAllEntries()
-        {
-            return _datasource.GetAll().ToList();
         }
 
         public List<IEntry> GetTodaysEntries()
@@ -44,4 +47,8 @@ namespace WhatAreYouDoing.Contexts
             Application.Current.MainWindow = null;
         }
     }
+
+   
+
+   
 }

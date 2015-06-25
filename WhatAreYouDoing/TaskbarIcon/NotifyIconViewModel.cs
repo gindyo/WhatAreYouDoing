@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Input;
+using WhatAreYouDoing.Main;
+using WhatAreYouDoing.Startup;
+using WhatAreYouDoing.Utilities;
 
-namespace WhatAreYouDoing
+namespace WhatAreYouDoing.TaskbarIcon
 {
     public class NotifyIconViewModel
     {

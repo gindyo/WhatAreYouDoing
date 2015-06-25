@@ -1,4 +1,4 @@
-﻿<Application x:Class="WhatAreYouDoing.App"
+﻿<Application x:Class="WhatAreYouDoing.Startup.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              ShutdownMode="OnExplicitShutdown">
@@ -13,7 +13,7 @@
         <!-- merge NotifyIcon and related stuff into the application -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="NotifyIconResources.xaml" />
+                <ResourceDictionary Source="/Resources/NotifyIconResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

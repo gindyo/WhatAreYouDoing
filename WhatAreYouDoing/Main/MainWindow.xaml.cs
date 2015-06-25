@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace WhatAreYouDoing
+namespace WhatAreYouDoing.Main
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
@@ -13,9 +13,9 @@ namespace WhatAreYouDoing
             InitializeComponent();
         }
 
-        public MainWindowViewModel ViewModel
+        public ViewModel ViewModel
         {
-            get { return DataContext as MainWindowViewModel; }
+            get { return DataContext as ViewModel; }
             set { DataContext = value; }
         }
 

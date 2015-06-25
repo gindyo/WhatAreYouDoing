@@ -2,21 +2,23 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using WhatAreYouDoing.Contexts;
+using WhatAreYouDoing.BaseClasses;
+using WhatAreYouDoing.History;
 using WhatAreYouDoing.Persistance;
+using WhatAreYouDoing.Utilities;
 
-namespace WhatAreYouDoing
+namespace WhatAreYouDoing.Main
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class ViewModel : BaseViewModel
     {
         private List<UIEntry> _entries;
         private IEntry _entry;
         private double _interval;
-        private IMainWindowViewModelContext _viewModelContext;
+        private IViewModelContext _viewModelContext;
 
         public Scheduler Scheduler { get; set; }
 
-        public IMainWindowViewModelContext ViewModelContext
+        public IViewModelContext ViewModelContext
         {
             get { return _viewModelContext; }
             set
@@ -47,17 +49,12 @@ namespace WhatAreYouDoing
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public void CloseWindow()
         {
             _viewModelContext.Close();
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public IHistoryViewModel HistoryViewModel { get; set; }
+       
     }
 }

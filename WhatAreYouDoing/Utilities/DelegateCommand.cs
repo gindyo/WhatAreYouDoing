@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace WhatAreYouDoing
+namespace WhatAreYouDoing.Utilities
 {
     /// <summary>
     ///     Simplistic delegate command for the demo.

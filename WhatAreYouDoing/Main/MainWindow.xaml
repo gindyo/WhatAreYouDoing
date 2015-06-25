@@ -1,8 +1,9 @@
-﻿<Window x:Class="WhatAreYouDoing.MainWindow"
+﻿<Window x:Class="WhatAreYouDoing.Main.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:whatAreYouDoing="clr-namespace:WhatAreYouDoing"
         xmlns:persistance="clr-namespace:WhatAreYouDoing.Persistance"
+        xmlns:history="clr-namespace:WhatAreYouDoing.History"
         Title="MainWindow" Height="350" Width="525">
     <TabControl>
         <TabItem Header="Main">
@@ -20,7 +21,10 @@
                 </DataGrid>
             </Grid>
         </TabItem>
-        <TabItem Header="Settings">
+        <TabItem Header="History" DataContext="{Binding HistoryViewModel}">
+            <history:View/>
+        </TabItem>
+        <TabItem Header="Settings" >
             <StackPanel Orientation="Horizontal" Height="30 " VerticalAlignment="Top">
                 <Label VerticalAlignment="Top" Height="30 " Margin="0">
                     Popup Interval(in minutes):

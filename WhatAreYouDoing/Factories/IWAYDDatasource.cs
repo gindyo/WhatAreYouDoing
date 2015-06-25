@@ -9,7 +9,7 @@ namespace WhatAreYouDoing.Factories
     {
         IQueryable<IEntry> GetAll();
         void Save(IEntry currentEntry);
-        IEntry GetEntry(int id);
+        IEntry GetEntry(long id);
         IEntry GetEntry();
     }
 }

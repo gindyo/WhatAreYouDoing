@@ -1,7 +1,7 @@
 using System;
 using System.Timers;
 
-namespace WhatAreYouDoing
+namespace WhatAreYouDoing.Utilities
 {
     public class Scheduler
     {
