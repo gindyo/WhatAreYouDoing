@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WhatAreYouDoing.BaseClasses;
-using WhatAreYouDoing.History;
 using WhatAreYouDoing.Interfaces;
-using WhatAreYouDoing.Persistance;
 using WhatAreYouDoing.UIModels;
 using WhatAreYouDoing.Utilities;
 
-namespace WhatAreYouDoing.Main
+namespace WhatAreYouDoing.Display.Main
 {
-    public class ViewModel : BaseViewModel
+    public class ViewModel : BaseClasses.ViewModel
     {
         private List<UIEntry> _entries;
         private IEntry _entry;
@@ -18,8 +16,8 @@ namespace WhatAreYouDoing.Main
 
         #region Windsor injected
 
-        public IHistoryViewModel HistoryViewModel { get; set; }
-        public Scheduler Scheduler { get; set; }
+        public Settings.ViewModel SettingsViewModel { get; set; }
+        public History.ViewModel HistoryViewModel { get; set; }
 
         #endregion
 

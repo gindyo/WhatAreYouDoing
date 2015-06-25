@@ -5,11 +5,11 @@ using WhatAreYouDoing.BaseClasses;
 using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.UIModels;
 
-namespace WhatAreYouDoing.History
+namespace WhatAreYouDoing.Display.History
 {
     
 
-    public class ViewModel : BaseViewModel, IHistoryViewModel
+    public class ViewModel : BaseClasses.ViewModel, IHistoryViewModel
     {
         private IViewModelContext _context;
         private DateTime _selectedDate;

@@ -19,9 +19,9 @@ namespace WhatAreYouDoing.Utilities
             set { _timer.Interval = value*1000*60; }
         }
 
-        public void Repeat(Action act, int i)
+        public void Repeat(Action act, double i)
         {
-            _timer.Interval = i;
+            Interval = i;
             ElapsedEventHandler eh = (sender, args) => act();
             _timer.Elapsed += eh;
             _timer.Start();

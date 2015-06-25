@@ -2,7 +2,7 @@
 using Volante;
 using WhatAreYouDoing.Interfaces;
 
-namespace WhatAreYouDoing.Persistance
+namespace WhatAreYouDoing.Persistance.Models
 {
     public class Entry : Persistent, IEntry
     {

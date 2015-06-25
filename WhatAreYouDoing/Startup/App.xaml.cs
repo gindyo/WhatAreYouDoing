@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace WhatAreYouDoing.Startup
         protected override void OnStartup(StartupEventArgs e)
         {
             ExitIfAlreadyRunning();
-            StartServer();
+           // StartServer();
 
             _container = new WindsorContainer().Install(FromAssembly.This());
 
@@ -34,8 +35,8 @@ namespace WhatAreYouDoing.Startup
 
             PopTheWindow();
             var scheduler = _container.Resolve<Scheduler>();
-            const int min15 = 900000;
-            scheduler.Repeat(PopTheWindow, min15);
+            var interval = _container.Resolve<Display.Settings.Context>().GetInterval().Value;
+            scheduler.Repeat(PopTheWindow, Convert.ToDouble( interval));
             PopTheWindow();
         }
 
@@ -47,16 +48,23 @@ namespace WhatAreYouDoing.Startup
 
         private void ExitIfAlreadyRunning()
         {
+            string currentProcessName = Process.GetCurrentProcess().ProcessName;
             string[] processes = Process.GetProcesses().Select(p => p.ProcessName).ToArray();
-            if (processes.Count(p => p.Contains("WhatAreYouDoing")) < 2)
+            if (processes.Count(p=>p == currentProcessName ) < 2)
                 return;
 
+            //StartClient();
+            MessageBox.Show("Already running. Exiting..");
+            Shutdown();
+        }
+
+        private static void StartClient()
+        {
             var client = new NamedPipeClientStream(PipeName);
             client.Connect();
             var writer = new StreamWriter(client);
             writer.WriteLine(OpenWindowCommand);
             writer.Flush();
-            Shutdown();
         }
 
         protected override void OnExit(ExitEventArgs e)

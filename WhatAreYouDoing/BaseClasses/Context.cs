@@ -5,18 +5,22 @@ using WhatAreYouDoing.Persistance;
 
 namespace WhatAreYouDoing.BaseClasses
 {
-    public abstract class BaseViewModelContext
+    public abstract class Context
     {
         protected readonly IWAYDDatasource _datasource;
 
-        public BaseViewModelContext(IDataSourceFactory datasourceFactory)
+        public Context(IDataSourceFactory datasourceFactory)
         {
             _datasource = datasourceFactory.GetCurrent();
         }
 
-        public List<IEntry> GetAllEntries()
+        public IQueryable<IEntry> GetAllEntries()
         {
-            return _datasource.GetAll().ToList();
+            return _datasource.GetAllEntries();
+        }
+        protected IQueryable<ISetting> GetAllSettings()
+        {
+            return _datasource.GetAllSettings();
         }
     }
 }

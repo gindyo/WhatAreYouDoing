@@ -29,7 +29,7 @@ namespace WhatAreYouDoingTests
         {
             Mock<IDataSourceFactory> fakeDsFactoryMock = _mockRepo.Create<IDataSourceFactory>();
             Mock<IWAYDDatasource> fakeDatasource = _mockRepo.Create<IWAYDDatasource>();
-            fakeDatasource.Setup(ds => ds.GetAll()).Returns(entries.AsQueryable());
+            fakeDatasource.Setup(ds => ds.GetAllEntries()).Returns(entries.AsQueryable());
             fakeDsFactoryMock.Setup(f => f.GetCurrent()).Returns(fakeDatasource.Object);
             _container.Register(Component.For<IDataSourceFactory>().Instance(fakeDsFactoryMock.Object));
         }

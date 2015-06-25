@@ -1,10 +1,8 @@
-﻿using Castle.Windsor;
+﻿using System.Configuration;
+using Castle.Windsor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WhatAreYouDoing.History;
 using WhatAreYouDoing.Interfaces;
-using WhatAreYouDoing.Main;
 using WhatAreYouDoing.Startup;
-using ViewModel = WhatAreYouDoing.Main.ViewModel;
 
 namespace WhatAreYouDoingTests
 {
@@ -31,21 +29,27 @@ namespace WhatAreYouDoingTests
         [TestMethod]
         public void TestMainWindowInitialization()
         {
-            var mainWindow = container.Resolve<MainWindow>();
+            var mainWindow = container.Resolve<WhatAreYouDoing.Display.Main.MainWindow>();
             Assert.IsNotNull(mainWindow.ViewModel);
         }
 
         [TestMethod]
         public void TestViewModelInitialization()
         {
-            var mainWindowVm = container.Resolve<ViewModel>();
+            var mainWindowVm = container.Resolve<WhatAreYouDoing.Display.Main.ViewModel>();
             Assert.IsNotNull(mainWindowVm.ViewModelContext);
         }
 
         [TestMethod]
         public void HistoryViewModelIsResolvedSuccessfuly()
         {
-            var vm = container.Resolve<IHistoryViewModel>();
+            var vm = container.Resolve<WhatAreYouDoing.Display.History.ViewModel>();
+            Assert.IsNotNull(vm.Context);
+        }
+        [TestMethod]
+        public void SettingsViewModelIsResolvedSuccessfuly()
+        {
+            var vm = container.Resolve<WhatAreYouDoing.Display.Settings.ViewModel>();
             Assert.IsNotNull(vm.Context);
         }
     }

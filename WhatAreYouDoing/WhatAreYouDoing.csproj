@@ -63,18 +63,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BaseClasses\BaseViewModel.cs" />
-    <Compile Include="BaseClasses\BaseViewModelContext.cs" />
-    <Compile Include="History\View.xaml.cs">
+    <Compile Include="BaseClasses\ViewModel.cs" />
+    <Compile Include="BaseClasses\Context.cs" />
+    <Compile Include="Display\History\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="History\ViewModel.cs" />
+    <Compile Include="Display\History\ViewModel.cs" />
+    <Compile Include="Display\Settings\Context.cs" />
+    <Compile Include="Display\Settings\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Display\Settings\ViewModel.cs" />
     <Compile Include="Interfaces\IHistoryViewModel.cs" />
+    <Compile Include="Interfaces\ISetting.cs" />
     <Compile Include="Interfaces\IViewModelContext.cs" />
-    <Compile Include="Main\MainWindow.cs" />
+    <Compile Include="Display\Main\MainWindow.cs" />
+    <Compile Include="Enums\Setting.cs" />
+    <Compile Include="Persistance\Models\WAYDSetting.cs" />
     <Compile Include="UIModels\UIEntry.cs" />
-    <Compile Include="Main\ViewModel.cs" />
-    <Compile Include="Main\ViewModelContext.cs" />
+    <Compile Include="Display\Main\ViewModel.cs" />
+    <Compile Include="Display\Main\EntriesViewModelContext.cs" />
     <Compile Include="Startup\ApplicationWrapper.cs" />
     <Compile Include="Interfaces\IWAYDDatasource.cs" />
     <Compile Include="Interfaces\IApplicationWrapper.cs" />
@@ -87,13 +95,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\DelegateCommand.cs" />
-    <Page Include="History\View.xaml">
+    <Page Include="Display\History\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Main\MainWindow.xaml">
+    <Page Include="Display\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Display\Settings\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\NotifyIconResources.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,7 +116,7 @@
     <Compile Include="TaskbarIcon\NotifyIconViewModel.cs" />
     <Compile Include="Persistance\DatasourceFactory.cs" />
     <Compile Include="Persistance\DatabaseRoot.cs" />
-    <Compile Include="Persistance\Entry.cs" />
+    <Compile Include="Persistance\Models\Entry.cs" />
     <Compile Include="Persistance\EntryDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -136,9 +148,7 @@
   <ItemGroup>
     <Resource Include="Resources\hourglass.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Factories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

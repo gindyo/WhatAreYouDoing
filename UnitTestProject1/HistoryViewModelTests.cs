@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using WhatAreYouDoing.History;
+using WhatAreYouDoing.Display.History;
 using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Persistance;
+using WhatAreYouDoing.Persistance.Models;
 using WhatAreYouDoing.UIModels;
 
 namespace WhatAreYouDoingTests
@@ -21,7 +22,7 @@ namespace WhatAreYouDoingTests
 
             var entryList = new List<IEntry> {todaysEntry, yesterdaysEntry};
             var vmContext = new Mock<IViewModelContext>();
-            vmContext.Setup(c => c.GetAllEntries()).Returns(entryList);
+            vmContext.Setup(c => c.GetAllEntries()).Returns(entryList.AsQueryable());
 
             var vm = new ViewModel {Context = vmContext.Object};
             vm.SelectedDate = yesterdaysEntry.Time.Date;

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WhatAreYouDoing.History
+namespace WhatAreYouDoing.Display.History
 {
     /// <summary>
     ///     Interaction logic for View.xaml

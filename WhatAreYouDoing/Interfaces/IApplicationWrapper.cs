@@ -1,4 +1,4 @@
-using WhatAreYouDoing.Main;
+using WhatAreYouDoing.Display.Main;
 
 namespace WhatAreYouDoing.Interfaces
 {

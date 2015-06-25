@@ -4,15 +4,14 @@ using System.Linq;
 using System.Windows;
 using WhatAreYouDoing.BaseClasses;
 using WhatAreYouDoing.Interfaces;
-using WhatAreYouDoing.Persistance;
 
-namespace WhatAreYouDoing.Main
+namespace WhatAreYouDoing.Display.Main
 {
-    public class ViewModelContext : BaseViewModelContext, IViewModelContext
+    public class EntriesViewModelContext : Context, IViewModelContext
     {
         private readonly IEntry _currentEntry;
 
-        public ViewModelContext(IDataSourceFactory datasourceFactory) : base(datasourceFactory)
+        public EntriesViewModelContext(IDataSourceFactory datasourceFactory) : base(datasourceFactory)
         {
             _currentEntry = _datasource.GetEntry();
         }
@@ -22,10 +21,11 @@ namespace WhatAreYouDoing.Main
             return _currentEntry;
         }
 
-        public List<IEntry> GetTodaysEntries()
+        public IEnumerable<IEntry> GetTodaysEntries()
         {
-            return _datasource.GetAll().Where(e => e.Time > DateTime.Today).ToList();
+            return GetAllEntries().Where(e => e.Time > DateTime.Today).ToList();
         }
+
 
         public void SaveCurrentEntry()
         {

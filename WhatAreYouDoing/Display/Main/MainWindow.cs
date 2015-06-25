@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace WhatAreYouDoing.Main
+namespace WhatAreYouDoing.Display.Main
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml

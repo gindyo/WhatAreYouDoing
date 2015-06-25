@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using WhatAreYouDoing.Display.Main;
 using WhatAreYouDoing.Interfaces;
-using WhatAreYouDoing.Main;
 using WhatAreYouDoing.Persistance;
+using WhatAreYouDoing.Persistance.Models;
 
 namespace WhatAreYouDoingTests
 {
@@ -34,8 +35,8 @@ namespace WhatAreYouDoingTests
             Mock<IWAYDDatasource> datasource = _mockRepo.Create<IWAYDDatasource>();
             _datasourceFactory.Setup(ds => ds.GetCurrent()).Returns(datasource.Object);
             var data = new List<IEntry> {new Entry()};
-            datasource.Setup(ds => ds.GetAll()).Returns(data.AsQueryable());
-            var context = new ViewModelContext(_datasourceFactory.Object);
+            datasource.Setup(ds => ds.GetAllEntries()).Returns(data.AsQueryable());
+            var context = new EntriesViewModelContext(_datasourceFactory.Object);
             context.GetAllEntries();
             _mockRepo.VerifyAll();
         }
@@ -47,7 +48,7 @@ namespace WhatAreYouDoingTests
             Mock<IWAYDDatasource> datasource = _mockRepo.Create<IWAYDDatasource>();
             _datasourceFactory.Setup(ds => ds.GetCurrent()).Returns(datasource.Object);
             datasource.Setup(ds => ds.GetEntry());
-            var context = new ViewModelContext(_datasourceFactory.Object);
+            var context = new EntriesViewModelContext(_datasourceFactory.Object);
             context.GetCurrentEntry();
             _mockRepo.VerifyAll();
         }

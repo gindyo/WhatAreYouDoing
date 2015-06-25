@@ -6,9 +6,13 @@ namespace WhatAreYouDoing.Interfaces
 {
     public interface IWAYDDatasource : IDatabase, IDisposable
     {
-        IQueryable<IEntry> GetAll();
+        IQueryable<IEntry> GetAllEntries();
+        IQueryable<ISetting> GetAllSettings();
         void Save(IEntry currentEntry);
+        void Save(ISetting currentEntry);
         IEntry GetEntry(long id);
         IEntry GetEntry();
+        ISetting GetSetting();
+        ISetting GetSetting(int id);
     }
 }

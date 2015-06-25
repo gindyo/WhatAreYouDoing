@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Volante;
 using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Persistance;
+using WhatAreYouDoing.Persistance.Models;
 
 namespace WhatAreYouDoingTests
 {
@@ -79,7 +80,7 @@ namespace WhatAreYouDoingTests
                 _db.Save(new Entry());
                 _db.Save(new Entry());
 
-                Assert.AreEqual(3, _db.GetAll().Count());
+                Assert.AreEqual(3, _db.GetAllEntries().Count());
             }
         }
 
@@ -98,12 +99,62 @@ namespace WhatAreYouDoingTests
             //open database again and get all entries
             using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
             {
-                all = _db.GetAll().ToList();
+                all = _db.GetAllEntries().ToList();
             }
             //delete the file
             File.Delete(DatasourceFactory.FileName);
 
             Assert.AreEqual(10, all.Count);
+        }
+
+        [TestMethod]
+        public void SettingIsPersistedToFile()
+        {
+            List<ISetting> all;
+            //write entries to database and close database
+            using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
+            {
+               _db.Save(new WAYDSetting{Key = 0, Value = 0.1}); ;
+            }
+            //open database again and get all entries
+            using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
+            {
+                all = _db.GetAllSettings().ToList();
+            }
+            //delete the file
+            File.Delete(DatasourceFactory.FileName);
+
+            Assert.AreEqual(all.First().Value, 0.1 );
+        }
+        [TestMethod]
+        public void ExistingSettingIsPersistedToFile()
+        {
+            List<ISetting> all;
+            //write entries to database and close database
+            using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
+            {
+               _db.Save(new WAYDSetting{Key = 0, Value = 30}); ;
+            }
+            using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
+            {
+                all = _db.GetAllSettings().ToList();
+            }
+            Assert.AreEqual(all.First().Value, 30 );
+
+            //open database agiain and edit value
+            using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
+            {
+               _db.Save(new WAYDSetting{Key = 0, Value = 0.1}); ;
+            }
+            //open database again and get all entries
+            using (IWAYDDatasource _db = new DatasourceFactory(false).GetCurrent())
+            {
+                all = _db.GetAllSettings().ToList();
+            }
+            //delete the file
+            File.Delete(DatasourceFactory.FileName);
+
+            Assert.AreEqual(all.First().Value, 0.1 );
         }
     }
 }

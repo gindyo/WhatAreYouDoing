@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Input;
+using WhatAreYouDoing.Display.Main;
 using WhatAreYouDoing.Interfaces;
-using WhatAreYouDoing.Main;
 using WhatAreYouDoing.Startup;
 using WhatAreYouDoing.Utilities;
 

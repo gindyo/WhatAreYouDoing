@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WhatAreYouDoing.Interfaces
 {
     public interface IViewModelContext
     {
         IEntry GetCurrentEntry();
-        List<IEntry> GetAllEntries();
+        IQueryable<IEntry> GetAllEntries();
         void SaveCurrentEntry();
         void Close();
-        List<IEntry> GetTodaysEntries();
+        IEnumerable<IEntry> GetTodaysEntries();
     }
 }
