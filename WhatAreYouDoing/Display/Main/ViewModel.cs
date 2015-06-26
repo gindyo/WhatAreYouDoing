@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WhatAreYouDoing.BaseClasses;
 using WhatAreYouDoing.Interfaces;
@@ -9,7 +10,7 @@ namespace WhatAreYouDoing.Display.Main
 {
     public class ViewModel : BaseClasses.ViewModel
     {
-        private List<UIEntry> _entries;
+        private List<IUIEntry> _entries;
         private IEntry _entry;
         private double _interval;
         private IViewModelContext _viewModelContext;
@@ -28,11 +29,11 @@ namespace WhatAreYouDoing.Display.Main
             {
                 _viewModelContext = value;
                 _entry = value.GetCurrentEntry();
-                Entries = value.GetTodaysEntries().Select(e => new UIEntry(e)).ToList();
+                Entries = value.GetEntriesForDate(DateTime.Now).ToList();
             }
         }
 
-        public List<UIEntry> Entries
+        public List<IUIEntry> Entries
         {
             get { return _entries; }
             set

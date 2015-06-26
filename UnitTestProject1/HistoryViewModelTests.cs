@@ -23,12 +23,13 @@ namespace WhatAreYouDoingTests
             var entryList = new List<IEntry> {todaysEntry, yesterdaysEntry};
             var vmContext = new Mock<IViewModelContext>();
             vmContext.Setup(c => c.GetAllEntries()).Returns(entryList.AsQueryable());
+            vmContext.Setup(c => c.NewUIEntry(It.IsAny<IEntry>())).Returns(new UIEntry(yesterdaysEntry));
 
             var vm = new ViewModel {Context = vmContext.Object};
             vm.SelectedDate = yesterdaysEntry.Time.Date;
 
             var expectedEntry = new UIEntry(yesterdaysEntry);
-            UIEntry actualEntry = vm.Entries.Single();
+            IUIEntry actualEntry = vm.Entries.Single();
 
             Assert.AreEqual(expectedEntry, actualEntry);
         }

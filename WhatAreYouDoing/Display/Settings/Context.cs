@@ -8,7 +8,7 @@ namespace WhatAreYouDoing.Display.Settings
     public class Context : BaseClasses.Context
     {
         private Scheduler _scheduler;
-        public Context(IDataSourceFactory datasourceFactory, Scheduler scheduler) : base(datasourceFactory)
+        public Context(IDataSourceFactory datasourceFactory, Scheduler scheduler, IModelFactory modelFactory) : base(datasourceFactory, modelFactory)
         {
             _scheduler = scheduler;
         }
@@ -22,7 +22,6 @@ namespace WhatAreYouDoing.Display.Settings
             interval.Key = (int)Setting.Interval;
             interval.Value = 15;
             return interval;
-
         }
 
         public void SaveInterval(ISetting interval)

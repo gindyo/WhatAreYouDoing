@@ -8,4 +8,11 @@ namespace WhatAreYouDoing.Interfaces
         string Value { get; set; }
         DateTime Time { get; }
     }
+
+    public interface IUIEntry 
+    {
+        string Value { get; set; }
+        DateTime Time { get; }
+       TimeSpan Duration { get; set; } 
+    }
 }

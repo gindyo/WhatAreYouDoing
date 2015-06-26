@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using WhatAreYouDoing.BaseClasses;
 using WhatAreYouDoing.Interfaces;
+using WhatAreYouDoing.ObjectFactory;
 using WhatAreYouDoing.UIModels;
 
 namespace WhatAreYouDoing.Display.History
@@ -30,13 +32,12 @@ namespace WhatAreYouDoing.Display.History
             set
             {
                 _selectedDate = value;
-                Entries =
-                    Context.GetAllEntries().Where(e => e.Time.Date == value.Date).Select(e => new UIEntry(e)).ToList();
+                Entries = Context.GetEntriesForDate(value.Date).ToList();
                 OnPropertyChanged();
                 OnPropertyChanged("Entries");
             }
         }
 
-        public List<UIEntry> Entries { get; set; }
+        public List<IUIEntry> Entries { get; set; }
     }
 }

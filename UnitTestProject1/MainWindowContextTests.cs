@@ -36,11 +36,16 @@ namespace WhatAreYouDoingTests
             _datasourceFactory.Setup(ds => ds.GetCurrent()).Returns(datasource.Object);
             var data = new List<IEntry> {new Entry()};
             datasource.Setup(ds => ds.GetAllEntries()).Returns(data.AsQueryable());
-            var context = new EntriesViewModelContext(_datasourceFactory.Object);
+            var context = new EntriesViewModelContext(_datasourceFactory.Object, null);
             context.GetAllEntries();
             _mockRepo.VerifyAll();
         }
 
+        [TestMethod]
+        public void TestEntriesHaveDuration()
+        {
+            
+        }
 
         [TestMethod]
         public void TestGetCurrentFromContext()
@@ -48,7 +53,7 @@ namespace WhatAreYouDoingTests
             Mock<IWAYDDatasource> datasource = _mockRepo.Create<IWAYDDatasource>();
             _datasourceFactory.Setup(ds => ds.GetCurrent()).Returns(datasource.Object);
             datasource.Setup(ds => ds.GetEntry());
-            var context = new EntriesViewModelContext(_datasourceFactory.Object);
+            var context = new EntriesViewModelContext(_datasourceFactory.Object,null);
             context.GetCurrentEntry();
             _mockRepo.VerifyAll();
         }

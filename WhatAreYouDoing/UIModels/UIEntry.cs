@@ -1,12 +1,16 @@
 using System;
 using WhatAreYouDoing.Interfaces;
-using WhatAreYouDoing.Persistance;
 
 namespace WhatAreYouDoing.UIModels
 {
-    public class UIEntry
+    public class UIEntry : IUIEntry
     {
         private readonly IEntry entry;
+        private TimeSpan _duration;
+
+        public UIEntry()
+        {
+        }
 
         public UIEntry(IEntry entry)
         {
@@ -22,6 +26,12 @@ namespace WhatAreYouDoing.UIModels
         public DateTime Time
         {
             get { return entry.Time; }
+        }
+
+        public TimeSpan Duration
+        {
+            get { return _duration; }
+            set { _duration = value; }
         }
 
         public IEntry ToInterface()

@@ -65,6 +65,9 @@
     </ApplicationDefinition>
     <Compile Include="BaseClasses\ViewModel.cs" />
     <Compile Include="BaseClasses\Context.cs" />
+    <Compile Include="Display\Common\EntriesGrid.xaml.cs">
+      <DependentUpon>EntriesGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Display\History\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
@@ -75,10 +78,12 @@
     </Compile>
     <Compile Include="Display\Settings\ViewModel.cs" />
     <Compile Include="Interfaces\IHistoryViewModel.cs" />
+    <Compile Include="Interfaces\IModelFactory.cs" />
     <Compile Include="Interfaces\ISetting.cs" />
     <Compile Include="Interfaces\IViewModelContext.cs" />
     <Compile Include="Display\Main\MainWindow.cs" />
     <Compile Include="Enums\Setting.cs" />
+    <Compile Include="ObjectFactory\ModelsFactory.cs" />
     <Compile Include="Persistance\Models\WAYDSetting.cs" />
     <Compile Include="UIModels\UIEntry.cs" />
     <Compile Include="Display\Main\ViewModel.cs" />
@@ -95,6 +100,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\DelegateCommand.cs" />
+    <Page Include="Display\Common\EntriesGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Display\History\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

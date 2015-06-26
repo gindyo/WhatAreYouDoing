@@ -7,6 +7,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using WhatAreYouDoing.Display.Main;
 using WhatAreYouDoing.Interfaces;
+using WhatAreYouDoing.ObjectFactory;
 using WhatAreYouDoing.Persistance;
 using WhatAreYouDoing.TaskbarIcon;
 using WhatAreYouDoing.Utilities;
@@ -30,6 +31,7 @@ namespace WhatAreYouDoing.Startup
         public const string HistoryViewmodel = "History.ViewModel";
         public const string Application = "Application";
         public const string SettingsViewModel = "SettingsViewModel";
+        public const string ModelFactory = "ModelFactory";
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
@@ -37,8 +39,11 @@ namespace WhatAreYouDoing.Startup
             container.Kernel.AddFacility<TypedFactoryFacility>();
 
             RegisterViewModels();
-
             RegisterContexts();
+
+            container.Register(Component.For<IModelFactory>()
+                .ImplementedBy<ModelsFactory>()
+                .Named(ModelFactory));
 
             container.Register(Component.For<IApplicationWrapper>()
                 .ImplementedBy<ApplicationWrapper>()
@@ -69,7 +74,10 @@ namespace WhatAreYouDoing.Startup
             
             container.Register(Component.For<IViewModelContext>()
                 .ImplementedBy<EntriesViewModelContext>()
-                .DependsOn(Dependency.OnComponent(typeof (IDataSourceFactory), Datasourcefactory))
+                .DependsOn(
+                    Dependency.OnComponent(typeof (IDataSourceFactory), Datasourcefactory),
+                    Dependency.OnComponent(typeof (IModelFactory), ModelFactory)
+                )
                 .LifestyleTransient()
                 .Named(BaseViewModelContext));
 
@@ -105,4 +113,5 @@ namespace WhatAreYouDoing.Startup
 
         }
     }
+
 }

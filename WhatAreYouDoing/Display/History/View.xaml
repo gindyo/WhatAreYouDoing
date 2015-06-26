@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:WhatAreYouDoing.Display.Common"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -11,11 +12,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <DatePicker Grid.Row="0" SelectedDate="{Binding SelectedDate}" Width="100" Margin="10" />
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Entries}" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="I was.." Width="*" Binding="{Binding Value}" />
-                <DataGridTextColumn Header="Time" Width="150" Binding="{Binding Time}" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <common:EntriesGrid Grid.Row="1"/>
     </Grid>
 </UserControl>

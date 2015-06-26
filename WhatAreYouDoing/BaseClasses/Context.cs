@@ -8,10 +8,12 @@ namespace WhatAreYouDoing.BaseClasses
     public abstract class Context
     {
         protected readonly IWAYDDatasource _datasource;
+        private IModelFactory _modelFactory;
 
-        public Context(IDataSourceFactory datasourceFactory)
+        public Context(IDataSourceFactory datasourceFactory, IModelFactory modelFactory)
         {
             _datasource = datasourceFactory.GetCurrent();
+            _modelFactory = modelFactory;
         }
 
         public IQueryable<IEntry> GetAllEntries()
