@@ -15,7 +15,7 @@ namespace WhatAreYouDoingTests
         public void TestOpenWindow()
         {
             _appWrapper.Setup(w => w.PopWindow(It.IsAny<MainWindow>()));
-            _container.Register(Component.For<IApplicationWrapper>()
+            _container.Register(Component.For<IApplicationHandler>()
                 .Instance(_appWrapper.Object)
                 .Named("FakeWrapper")
                 .IsDefault());
@@ -30,7 +30,7 @@ namespace WhatAreYouDoingTests
         {
             _appWrapper.Verify(w => w.PopWindow(It.IsAny<MainWindow>()), Times.Never);
             _appWrapper.Setup(w => w.WindowIsOpen()).Returns(true);
-            _container.Register(Component.For<IApplicationWrapper>()
+            _container.Register(Component.For<IApplicationHandler>()
                 .Instance(_appWrapper.Object)
                 .Named("FakeWrapper")
                 .IsDefault());

@@ -10,7 +10,7 @@ namespace WhatAreYouDoing.TaskbarIcon
 {
     public class NotifyIconViewModel
     {
-        public IApplicationWrapper CurrentApp { get; set; }
+        public IApplicationHandler CurrentApp { get; set; }
         public Func<MainWindow> MainWindowFactory { get; set; }
 
 

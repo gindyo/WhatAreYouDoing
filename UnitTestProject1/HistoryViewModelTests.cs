@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Documents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WhatAreYouDoing.Display.History;
@@ -14,24 +15,30 @@ namespace WhatAreYouDoingTests
     [TestClass]
     public class HistoryViewModelTests : BaseViewModelTest
     {
+
         [TestMethod]
-        public void TestGettingYesterdaysEntries()
+        public void TestSettingDate()
         {
-            IEntry todaysEntry = new UIEntry(new Entry {Time = DateTime.Now}).ToInterface();
-            IEntry yesterdaysEntry = new UIEntry(new Entry {Time = DateTime.Now.AddDays(-1)}).ToInterface();
-
-            var entryList = new List<IEntry> {todaysEntry, yesterdaysEntry};
-            var vmContext = new Mock<IViewModelContext>();
-            vmContext.Setup(c => c.GetAllEntries()).Returns(entryList.AsQueryable());
-            vmContext.Setup(c => c.NewUIEntry(It.IsAny<IEntry>())).Returns(new UIEntry(yesterdaysEntry));
-
+            var vmContext = VMContext;
+            vmContext.Setup(c => c.GetEntriesForDate(DateTime.Now.Date.AddDays(-1))).Returns(new List<UIEntry>());
             var vm = new ViewModel {Context = vmContext.Object};
-            vm.SelectedDate = yesterdaysEntry.Time.Date;
+            vm.SelectedDate = DateTime.Now.Date.AddDays(-1);
+            vmContext.VerifyAll();
+        }
 
-            var expectedEntry = new UIEntry(yesterdaysEntry);
-            IUIEntry actualEntry = vm.Entries.Single();
+        [TestMethod]
+        public void TestSettingContext()
+        {
+            var vmContext = VMContext;
+            vmContext.Setup(c => c.GetEntriesForDate(DateTime.Now.Date.AddDays(-1))).Returns(new List<UIEntry>());
+            var vm = new ViewModel {Context = vmContext.Object};
+            Assert.AreEqual(DateTime.Now.Date, vm.SelectedDate.Date);
+            
+        }
 
-            Assert.AreEqual(expectedEntry, actualEntry);
+        private static Mock<IViewModelContext> VMContext
+        {
+            get { return new Mock<IViewModelContext>(); }
         }
     }
 }

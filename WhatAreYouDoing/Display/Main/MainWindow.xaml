@@ -12,7 +12,8 @@
                     <RowDefinition Height="50" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row="0" Text="{Binding Value}" KeyUp="UIElement_OnKeyUp" Name="TextBox" />
+                <TextBox Grid.Row="0" Text="{Binding Value}" KeyUp="UIElement_OnKeyUp" Name="TextBox"
+                         x:FieldModifier="public" />
                 <common:EntriesGrid Grid.Row="1"/>
             </Grid>
         </TabItem>

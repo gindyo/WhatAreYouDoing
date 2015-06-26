@@ -6,13 +6,13 @@ using WhatAreYouDoing.Interfaces;
 
 namespace WhatAreYouDoing.Startup
 {
-    public class ApplicationWrapper : IApplicationWrapper
+    public class ApplicationHandler : IApplicationHandler
     {
-        private readonly Application _app;
+        private readonly IApplicationWrapper _app;
 
-        public ApplicationWrapper()
+        public ApplicationHandler(IApplicationWrapper app)
         {
-            _app = Application.Current;
+            _app = app;
         }
 
         public virtual Dispatcher Dispatcher
@@ -27,7 +27,7 @@ namespace WhatAreYouDoing.Startup
 
         public bool WindowIsOpen()
         {
-            return _app.MainWindow != null && _app.MainWindow.IsLoaded;
+            return _app.MainWindow != null && _app.IsMainWindowLoaded;
         }
 
         public void CloseCurrentWindow()
@@ -44,19 +44,9 @@ namespace WhatAreYouDoing.Startup
             mainWindow.TextBox.Focus();
             mainWindow.Title = "What are you doing?";
             _app.MainWindow = mainWindow;
-            mainWindow.Show();
-            mainWindow.Activate();
-            SystemSounds.Beep.Play();
-        }
-
-        public virtual void SetMainWindow(MainWindow mWindow)
-        {
-            _app.MainWindow = mWindow;
-        }
-
-        public virtual MainWindow GetMainWindow()
-        {
-            return _app.MainWindow as MainWindow;
+            _app.ShowMainWindow();
+            _app.ActivateMainWindow();
+            _app.PlaySound();
         }
     }
 }

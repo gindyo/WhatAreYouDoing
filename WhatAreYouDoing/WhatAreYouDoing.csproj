@@ -88,8 +88,10 @@
     <Compile Include="UIModels\UIEntry.cs" />
     <Compile Include="Display\Main\ViewModel.cs" />
     <Compile Include="Display\Main\EntriesViewModelContext.cs" />
-    <Compile Include="Startup\ApplicationWrapper.cs" />
+    <Compile Include="Utilities\ApplicationHandler.cs" />
     <Compile Include="Interfaces\IWAYDDatasource.cs" />
+    <Compile Include="Interfaces\IApplicationHandler.cs" />
+    <Compile Include="ThirdPartyWrappers\ApplicationWrapper.cs" />
     <Compile Include="Interfaces\IApplicationWrapper.cs" />
     <Compile Include="Utilities\Scheduler.cs" />
     <Compile Include="Startup\WindsorInstaller.cs" />
@@ -157,7 +159,6 @@
   <ItemGroup>
     <Resource Include="Resources\hourglass.ico" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

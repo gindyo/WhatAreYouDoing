@@ -3,6 +3,7 @@ using Castle.Windsor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Startup;
+using WhatAreYouDoing.TaskbarIcon;
 
 namespace WhatAreYouDoingTests
 {
@@ -51,6 +52,12 @@ namespace WhatAreYouDoingTests
         {
             var vm = container.Resolve<WhatAreYouDoing.Display.Settings.ViewModel>();
             Assert.IsNotNull(vm.Context);
+        }
+        [TestMethod]
+        public void NotifyViewModelIsResolvedSuccessfuly()
+        {
+            var vm = container.Resolve<NotifyIconViewModel>();
+            Assert.IsNotNull(vm.CurrentApp);
         }
     }
 }

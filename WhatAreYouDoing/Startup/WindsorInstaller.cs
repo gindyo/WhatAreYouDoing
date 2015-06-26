@@ -10,6 +10,7 @@ using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.ObjectFactory;
 using WhatAreYouDoing.Persistance;
 using WhatAreYouDoing.TaskbarIcon;
+using WhatAreYouDoing.ThirdPartyWrappers;
 using WhatAreYouDoing.Utilities;
 using ViewModel = WhatAreYouDoing.Display.History.ViewModel;
 
@@ -18,6 +19,7 @@ namespace WhatAreYouDoing.Startup
     public class WindsorInstaller : IWindsorInstaller
     {
         private IWindsorContainer container;
+        private string _applicationWrapper;
         public const string SettingsContext = "SettnigsContext";
         public const string BaseViewModelContext = "MainWindowContext";
         public const bool InMemory = false;
@@ -29,9 +31,10 @@ namespace WhatAreYouDoing.Startup
         public const string Notifyiconviewmodel = "NotifyIconViewModel";
         public const string Datasource = "DataSource";
         public const string HistoryViewmodel = "History.ViewModel";
-        public const string Application = "Application";
+        public const string ApplicationHandler = "ApplicationHandler";
         public const string SettingsViewModel = "SettingsViewModel";
         public const string ModelFactory = "ModelFactory";
+        public const string ApplicationWrapper = "ApplicationWrapper";
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
@@ -45,9 +48,14 @@ namespace WhatAreYouDoing.Startup
                 .ImplementedBy<ModelsFactory>()
                 .Named(ModelFactory));
 
+            container.Register(Component.For<IApplicationHandler>()
+                .ImplementedBy<ApplicationHandler>()
+                .DependsOn(Dependency.OnComponent(typeof(IApplicationWrapper), ApplicationWrapper))
+                .Named(ApplicationHandler));
+
             container.Register(Component.For<IApplicationWrapper>()
                 .ImplementedBy<ApplicationWrapper>()
-                .Named(Application));
+                .Named(ApplicationWrapper));
 
             container.Register(Component.For<IDataSourceFactory>()
                 .ImplementedBy<DatasourceFactory>()
@@ -68,6 +76,7 @@ namespace WhatAreYouDoing.Startup
                 .Named(MainWindow));
 
         }
+
 
         private void RegisterContexts()
         {
@@ -104,7 +113,7 @@ namespace WhatAreYouDoing.Startup
                 .Named(MainWindowViewModel));
 
             container.Register(Component.For<NotifyIconViewModel>()
-                .DependsOn(Dependency.OnComponent(typeof (Application), Application))
+                .DependsOn(Dependency.OnComponent(typeof (Application), ApplicationHandler))
                 .Named(Notifyiconviewmodel));
 
             container.Register(Component.For<Display.Settings.ViewModel>()
@@ -113,5 +122,4 @@ namespace WhatAreYouDoing.Startup
 
         }
     }
-
 }

@@ -12,7 +12,7 @@ namespace WhatAreYouDoingTests
 {
     public class BaseViewModelTest
     {
-        protected Mock<IApplicationWrapper> _appWrapper;
+        protected Mock<IApplicationHandler> _appWrapper;
         protected WindsorContainer _container;
         protected MockRepository _mockRepo;
 
@@ -22,7 +22,7 @@ namespace WhatAreYouDoingTests
             _mockRepo = new MockRepository(MockBehavior.Default);
             _container = new WindsorContainer();
             _container.Install(new WindsorInstaller());
-            _appWrapper = _mockRepo.Create<IApplicationWrapper>();
+            _appWrapper = _mockRepo.Create<IApplicationHandler>();
         }
 
         protected void SetupFakeDatasource(List<IEntry> entries)
