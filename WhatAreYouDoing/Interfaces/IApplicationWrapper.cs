@@ -1,6 +1,7 @@
-﻿namespace WhatAreYouDoing.Interfaces
-{
-    public interface IApplicationWrapper
+﻿using System.Windows;
+using System.Windows.Threading;
+
+ace IApplicationWrapper
     {
         System.Windows.Threading.Dispatcher Dispatcher { get; }
         System.Windows.Window MainWindow { get; set; }

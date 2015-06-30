@@ -3,8 +3,9 @@ using System.Diagnostics;
 using System.Windows.Input;
 using WhatAreYouDoing.Display.Main;
 using WhatAreYouDoing.Interfaces;
-using WhatAreYouDoing.Startup;
 using WhatAreYouDoing.Utilities;
+
+g WhatAreYouDoing.Utilities;
 
 namespace WhatAreYouDoing.TaskbarIcon
 {

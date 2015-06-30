@@ -1,4 +1,4 @@
-namespace WhatAreYouDoing.Interfaces
+namespace WhatAreYouDoing.Enums
 {
     public enum Setting
     {

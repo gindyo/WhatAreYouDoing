@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using WhatAreYouDoing.Display.Settings;
 using WhatAreYouDoing.TaskbarIcon;
 using WhatAreYouDoing.Utilities;
 
-namespace WhatAreYouDoing.Startup
-{
-    public partial class App
+ public partial class App
     {
         private const string OpenWindowCommand = "openWidowCommand";
         private const string PipeName = "pipeServerName";
         private IWindsorContainer _container;
-        private Hardcodet.Wpf.TaskbarNotification.TaskbarIcon notifyIcon;
-
-        protected override void OnStartup(StartupEventArgs e)
+        private Hardcodet.Wpf.TaskbarNotification.TaskbarHardcodet.Wpf.TaskbarNotification.TaskbarIcone void OnStartup(StartupEventArgs e)
         {
             ExitIfAlreadyRunning();
            // StartServer();
@@ -27,9 +24,7 @@ namespace WhatAreYouDoing.Startup
             _container = new WindsorContainer().Install(FromAssembly.This());
 
             //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
-            notifyIcon = (Hardcodet.Wpf.TaskbarNotification.TaskbarIcon) FindResource("NotifyIcon");
-
-            //make sure the notifyIcon's context is resolved from the container
+            notifyIcon = (Hardcodet.Wpf.TaskbarNotification.TaskbarIHardcodet.Wpf.TaskbarNotification.TaskbarIcon   //make sure the notifyIcon's context is resolved from the container
             notifyIcon.DataContext = _container.Resolve<NotifyIconViewModel>();
 
 

@@ -2,11 +2,10 @@ using System;
 
 namespace WhatAreYouDoing.Interfaces
 {
-    public interface IEntry
+    public interface IUIEntry
     {
-        long Id { get; }
         string Value { get; set; }
         DateTime Time { get; }
+        TimeSpan Duration { get; set; }
     }
-
 }

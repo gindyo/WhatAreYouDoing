@@ -1,10 +1,8 @@
-﻿using System.Media;
-using System.Windows;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 using WhatAreYouDoing.Display.Main;
 using WhatAreYouDoing.Interfaces;
 
-namespace WhatAreYouDoing.Startup
+namespace WhatAreYouDoing.Utilities
 {
     public class ApplicationHandler : IApplicationHandler
     {
@@ -47,6 +45,9 @@ namespace WhatAreYouDoing.Startup
             _app.ShowMainWindow();
             _app.ActivateMainWindow();
             _app.PlaySound();
+        }
+    }
+}      _app.PlaySound();
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Windows.Controls;
+
+tions.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+using S
+    /// <summary>
+    ///     Interaction logic for EntriesGrid.xaml
+    /// </summary>trols;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;

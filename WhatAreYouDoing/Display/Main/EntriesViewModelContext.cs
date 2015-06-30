@@ -4,7 +4,8 @@ using System.Linq;
 using System.Windows;
 using WhatAreYouDoing.BaseClasses;
 using WhatAreYouDoing.Interfaces;
-using WhatAreYouDoing.UIModels;
+
+ing WhatAreYouDoing.UIModels;
 
 namespace WhatAreYouDoing.Display.Main
 {
