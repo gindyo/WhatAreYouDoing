@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Configuration;
 using System.Windows;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using WhatAreYouDoing.Display.Main;
+using WhatAreYouDoing.Display.Settings;
 using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.ObjectFactory;
 using WhatAreYouDoing.Persistance;
 using WhatAreYouDoing.TaskbarIcon;
 using WhatAreYouDoing.ThirdPartyWrappers;
 using WhatAreYouDoing.Utilities;
-using ViewModel = WhatAreYouDoing.Display.History.ViewModel;
+using ViewModel = WhatAreYouDoing.Display.Main.ViewModel;
 
-namespace WhatAreYouDoing.Startup
+ WhatAreYouDoing.Startup
 {
     public class WindsorInstaller : IWindsorInstaller
     {
@@ -99,8 +99,7 @@ namespace WhatAreYouDoing.Startup
         }
 
         private void RegisterViewModels()
-        {
-            container.Register(Component.For<Display.History.ViewModel>()
+Display.History.ViewModelntainer.Register(Component.For<Display.History.ViewModel>()
                 .DependsOn(Dependency.OnComponent(typeof (IViewModelContext), BaseViewModelContext))
                 .Named(HistoryViewmodel));
 
@@ -114,9 +113,7 @@ namespace WhatAreYouDoing.Startup
 
             container.Register(Component.For<NotifyIconViewModel>()
                 .DependsOn(Dependency.OnComponent(typeof (Application), ApplicationHandler))
-                .Named(Notifyiconviewmodel));
-
-            container.Register(Component.For<Display.Settings.ViewModel>()
+                .Named(NoDisplay.Settings.ViewModel          container.Register(Component.For<Display.Settings.ViewModel>()
                 .DependsOn(Dependency.OnComponent(typeof (WhatAreYouDoing.Display.Settings.Context), SettingsContext))
                 .Named(SettingsViewModel));
 

@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Linq;
+using WhatAreYouDoing.Enums;
 using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Utilities;
 
+Doing.Utilities;
+
 namespace WhatAreYouDoing.Display.Settings
 {
-    public class Context : BaseClasses.Context
+    pubBaseClasses.Context BaseClasses.Context
     {
         private Scheduler _scheduler;
         public Context(IDataSourceFactory datasourceFactory, Scheduler scheduler, IModelFactory modelFactory) : base(datasourceFactory, modelFactory)

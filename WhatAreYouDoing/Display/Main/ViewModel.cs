@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WhatAreYouDoing.BaseClasses;
 using WhatAreYouDoing.Interfaces;
+
+sing WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.UIModels;
-using WhatAreYouDoing.Utilities;
+usingBaseClasses.ViewModelities;
 
 namespace WhatAreYouDoing.Display.Main
 {
     public class ViewModel : BaseClasses.ViewModel
     {
         private List<IUIEntry> _entries;
-        private IEntry _entry;
-        private double _interval;
-        private IViewModelContext _viewModelContext;
+        private 
 
         #region Windsor injected
 
         public Settings.ViewModel SettingsViewModel { get; set; }
+        public History.ViewModel HistoryViewModel { get; set; }
+
+        #endregionel { get; set; }
         public History.ViewModel HistoryViewModel { get; set; }
 
         #endregion

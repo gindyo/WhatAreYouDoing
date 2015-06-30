@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WhatAreYouDoing.Interfaces;
+using WhatAreYouDoing.Persistance.Models;
+using WhatAreYouDoing.UIModels;
+
+Tasks;
 using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Persistance.Models;
 using WhatAreYouDoing.UIModels;

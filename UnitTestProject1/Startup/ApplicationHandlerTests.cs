@@ -8,6 +8,8 @@ using WhatAreYouDoing.Display.Main;
 using WhatAreYouDoing.Interfaces;
 using WhatAreYouDoing.Startup;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WhatAreYouDoing.Utilities;
+
 namespace WhatAreYouDoing.Startup.Tests
 {
     [TestClass()]

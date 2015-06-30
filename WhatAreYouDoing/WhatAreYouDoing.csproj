@@ -83,6 +83,7 @@
     <Compile Include="Interfaces\IHistoryViewModel.cs" />
     <Compile Include="Interfaces\IModelFactory.cs" />
     <Compile Include="Interfaces\ISetting.cs" />
+    <Compile Include="Interfaces\IUIEntry.cs" />
     <Compile Include="Interfaces\IViewModelContext.cs" />
     <Compile Include="Display\Main\MainWindow.cs" />
     <Compile Include="Enums\Setting.cs" />
