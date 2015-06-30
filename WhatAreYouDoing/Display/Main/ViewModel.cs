@@ -30,6 +30,16 @@ namespace WhatAreYouDoing.Display.Main
                 _viewModelContext = value;
                 _entry = value.GetCurrentEntry();
                 Entries = value.GetEntriesForDate(DateTime.Now).ToList();
+                SetLastEntryDuration();
+            }
+        }
+
+        private void SetLastEntryDuration()
+        {
+            if (Entries.Any())
+            {
+                IUIEntry lastEntry = Entries.Last();
+                lastEntry.Duration = DateTime.Now - lastEntry.Time;
             }
         }
 
